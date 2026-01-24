@@ -136,6 +136,14 @@ Contributions are welcome! Please see our contributing guidelines.
 
 ---
 
+## Support
+
+If you find this project useful, consider giving [Cua](https://github.com/trycua/cua) a star!
+
+[![Star Cua](https://img.shields.io/github/stars/trycua/cua?style=social)](https://github.com/trycua/cua)
+
+---
+
 ## License
 
 MIT License - see [LICENSE](./LICENSE) for details.
