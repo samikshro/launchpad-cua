@@ -31,6 +31,9 @@ A monorepo for creating product launch videos using **Remotion**, **Next.js**, a
 
 Works great with **Claude Code** + [Remotion Skills](https://github.com/remotion-dev/skills).
 
+> [!NOTE]
+> If you find this project useful, consider giving [Cua](https://github.com/trycua/cua) a star!
+
 ---
 
 ## Quick Start
@@ -133,14 +136,6 @@ See [Claude Code Workflow](./docs/CLAUDE_CODE_WORKFLOW.md) for details.
 ## Contributing
 
 Contributions are welcome! Please see our contributing guidelines.
-
----
-
-## Support
-
-If you find this project useful, consider giving [Cua](https://github.com/trycua/cua) a star!
-
-[![Star Cua](https://img.shields.io/github/stars/trycua/cua?style=social)](https://github.com/trycua/cua)
 
 ---
 
