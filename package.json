@@ -1,0 +1,23 @@
+{
+  "name": "launchpad",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "create-video": "tsx scripts/create-video.ts",
+    "remotion": "turbo run remotion",
+    "render": "turbo run render",
+    "deploy": "turbo run deploy"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.14",
+    "prettier": "^3.6.0",
+    "tsx": "^4.19.0",
+    "turbo": "^2.3.0",
+    "typescript": "^5.9.3"
+  }
+}

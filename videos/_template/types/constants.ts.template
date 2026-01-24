@@ -1,0 +1,7 @@
+// Video configuration constants
+export const VIDEO_WIDTH = {{VIDEO_WIDTH}};
+export const VIDEO_HEIGHT = {{VIDEO_HEIGHT}};
+export const VIDEO_FPS = {{VIDEO_FPS}};
+
+// Composition name (used for rendering)
+export const COMP_NAME = "{{VIDEO_NAME}}";

@@ -1,0 +1,58 @@
+# {{DISPLAY_NAME}}
+
+{{DESCRIPTION}}
+
+## Development
+
+```bash
+# Open Remotion Studio for live preview
+pnpm remotion
+
+# Start Next.js dev server (for web player)
+pnpm dev
+```
+
+## Rendering
+
+```bash
+# Render full video locally
+pnpm render
+
+# Render at half resolution (faster preview)
+pnpm render:preview
+```
+
+## Project Structure
+
+```
+src/
+├── app/                 # Next.js app (web player UI)
+├── remotion/
+│   ├── Root.tsx        # Composition registry
+│   ├── index.ts        # Entry point
+│   └── scenes/         # Video scenes
+│       ├── IntroScene.tsx
+│       └── FullVideo.tsx
+├── components/          # React components
+└── styles/             # Global styles
+```
+
+## Adding New Scenes
+
+1. Create a new file in `src/remotion/scenes/`
+2. Export the scene component and duration constant
+3. Register the composition in `src/remotion/Root.tsx`
+
+Example:
+```tsx
+// src/remotion/scenes/NewScene.tsx
+export const NEW_SCENE_DURATION = 90; // 3 seconds at 30fps
+
+export const NewScene: React.FC = () => {
+  return (
+    <AbsoluteFill>
+      {/* Your scene content */}
+    </AbsoluteFill>
+  );
+};
+```
