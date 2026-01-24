@@ -7,6 +7,8 @@
     </picture>
   </a>
 
+  <br/>
+
   <a href="https://remotion.dev">
     <img src="https://img.shields.io/badge/Built%20with-Remotion-5851DB" alt="Built with Remotion">
   </a>
@@ -18,7 +20,7 @@
 <br/>
 
 <div align="center">
-  <video src="https://github.com/trycua/launchpad/raw/main/assets/cua-bench.mp4" width="600" autoplay loop muted playsinline>
+  <video src="https://github.com/user-attachments/assets/78347b08-e36a-43ce-a781-31c114c333fd" width="600" autoplay loop muted playsinline>
     Your browser does not support the video tag.
   </video>
 </div>
