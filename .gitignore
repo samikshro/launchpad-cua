@@ -1,0 +1,46 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs
+.next
+out
+dist
+*.tsbuildinfo
+
+# Remotion
+.remotion
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE / Tools
+.idea
+.vscode
+.cursor
+.windsurf
+.agents
+.claude
+.context
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Turbo
+.turbo
+
+# Rendered videos
+*.mp4
+*.webm
+!/public/**/*.mp4
+!/public/**/*.webm
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*

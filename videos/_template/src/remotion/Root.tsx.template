@@ -1,0 +1,30 @@
+import { Composition } from "remotion";
+import { IntroScene, INTRO_SCENE_DURATION } from "./scenes/IntroScene";
+import { FullVideo, FULL_VIDEO_DURATION } from "./scenes/FullVideo";
+import { VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FPS } from "../../types/constants";
+
+export const RemotionRoot: React.FC = () => {
+  return (
+    <>
+      {/* Individual scene for development/preview */}
+      <Composition
+        id="{{VIDEO_NAME}}Intro"
+        component={IntroScene}
+        durationInFrames={INTRO_SCENE_DURATION}
+        fps={VIDEO_FPS}
+        width={VIDEO_WIDTH}
+        height={VIDEO_HEIGHT}
+      />
+
+      {/* Full video composition */}
+      <Composition
+        id="{{VIDEO_NAME}}Full"
+        component={FullVideo}
+        durationInFrames={FULL_VIDEO_DURATION}
+        fps={VIDEO_FPS}
+        width={VIDEO_WIDTH}
+        height={VIDEO_HEIGHT}
+      />
+    </>
+  );
+};

@@ -1,0 +1,4 @@
+packages:
+  - "packages/*"
+  - "videos/*"
+  - "!videos/_template"

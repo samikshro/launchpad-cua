@@ -1,0 +1,15 @@
+{
+  "name": "@launchpad/assets",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./brand": "./brand/index.ts",
+    "./brand/*": "./brand/*"
+  },
+  "dependencies": {
+    "@remotion/google-fonts": "4.0.407"
+  }
+}

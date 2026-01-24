@@ -1,0 +1,35 @@
+import { AbsoluteFill } from "remotion";
+import { FadeIn } from "@launchpad/shared/components/animations";
+import { COLORS } from "@launchpad/assets/brand";
+import { loadFont } from "@remotion/google-fonts/Urbanist";
+
+const { fontFamily } = loadFont();
+
+export const INTRO_SCENE_DURATION = 90; // 3 seconds at 30fps
+
+export const IntroScene: React.FC = () => {
+  return (
+    <AbsoluteFill
+      style={{
+        backgroundColor: COLORS.background.cream,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <FadeIn durationInFrames={30} direction="up">
+        <h1
+          style={{
+            fontFamily,
+            fontSize: 80,
+            fontWeight: 700,
+            color: COLORS.text.primary,
+            textAlign: "center",
+            padding: "0 100px",
+          }}
+        >
+          {{DISPLAY_NAME}}
+        </h1>
+      </FadeIn>
+    </AbsoluteFill>
+  );
+};

@@ -1,0 +1,27 @@
+import { AbsoluteFill, Series, Audio, staticFile } from "remotion";
+import { IntroScene, INTRO_SCENE_DURATION } from "./IntroScene";
+
+// Total duration of all scenes
+export const FULL_VIDEO_DURATION = INTRO_SCENE_DURATION;
+
+export const FullVideo: React.FC = () => {
+  return (
+    <AbsoluteFill>
+      {/* Uncomment to add background music */}
+      {/* <Audio src={staticFile("background-music.wav")} volume={0.3} /> */}
+
+      <Series>
+        <Series.Sequence durationInFrames={INTRO_SCENE_DURATION}>
+          <IntroScene />
+        </Series.Sequence>
+
+        {/* Add more scenes here */}
+        {/*
+        <Series.Sequence durationInFrames={SCENE_2_DURATION}>
+          <Scene2 />
+        </Series.Sequence>
+        */}
+      </Series>
+    </AbsoluteFill>
+  );
+};
