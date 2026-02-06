@@ -18,7 +18,7 @@ export const MasterScene: React.FC = () => {
     },
   });
 
-  const outputDoneFrame = getOutputDoneFrame();
+  const outputDoneFrame = getOutputDoneFrame(fps);
   const flipOut = spring({
     frame: frame - outputDoneFrame,
     fps,

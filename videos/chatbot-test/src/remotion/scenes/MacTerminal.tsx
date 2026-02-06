@@ -29,7 +29,6 @@ export const MacTerminal: React.FC = () => {
             borderBottom: "1px solid #e2e8f0",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
             padding: "0 20px",
           }}
         >
@@ -62,16 +61,7 @@ export const MacTerminal: React.FC = () => {
               }}
             />
           </div>
-          <div
-            style={{
-              color: "#475569",
-              fontSize: 22,
-              fontWeight: 600,
-            }}
-          >
-            Chatbot
-          </div>
-          <div style={{ width: 66 }} />
+          <div style={{ flex: 1 }} />
         </div>
         <div style={{ flex: 1, backgroundColor: "#ffffff" }}>
           <TerminalContent />

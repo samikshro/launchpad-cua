@@ -4,9 +4,12 @@ export const ANNOUNCEMENT_DATA = {
   typingText: "Best plumber near me for emergency repairs",
   sendButtonLabel: "Voice",
   charsPerSecond: 22,
+  submitDelayInFrames: 4,
+  submitPointerTravelInFrames: 10,
+  submitClickInFrames: 6,
+  collapseInFrames: 10,
   inputFontSize: 48,
   backgroundColor: "#f8fafc",
-  outputDoneFrame: 120,
   terminalIntroOffsetY: 520,
   terminalRestOffsetY: 40,
   terminalRotateX: 14,
@@ -24,6 +27,22 @@ export const getFramesPerCommandChar = (fps: number): number => {
   return fps / ANNOUNCEMENT_DATA.charsPerSecond;
 };
 
-export const getOutputDoneFrame = (): number => {
-  return ANNOUNCEMENT_DATA.outputDoneFrame;
+export const getTypingDoneFrame = (fps: number): number => {
+  return Math.ceil(ANNOUNCEMENT_DATA.typingText.length * getFramesPerCommandChar(fps));
+};
+
+export const getSubmitMoveStartFrame = (fps: number): number => {
+  return getTypingDoneFrame(fps) + ANNOUNCEMENT_DATA.submitDelayInFrames;
+};
+
+export const getSubmitClickStartFrame = (fps: number): number => {
+  return getSubmitMoveStartFrame(fps) + ANNOUNCEMENT_DATA.submitPointerTravelInFrames;
+};
+
+export const getCollapseStartFrame = (fps: number): number => {
+  return getSubmitClickStartFrame(fps) + ANNOUNCEMENT_DATA.submitClickInFrames;
+};
+
+export const getOutputDoneFrame = (fps: number): number => {
+  return getCollapseStartFrame(fps) + ANNOUNCEMENT_DATA.collapseInFrames;
 };

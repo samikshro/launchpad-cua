@@ -1,12 +1,20 @@
 import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
-import { ANNOUNCEMENT_DATA, getFramesPerCommandChar } from "./AnnouncementData";
+import {
+  ANNOUNCEMENT_DATA,
+  getSubmitClickStartFrame,
+  getSubmitMoveStartFrame,
+  getTypingDoneFrame,
+} from "./AnnouncementData";
 import { Cursor } from "./Cursor";
 
 export const TerminalContent: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const typingEndFrame = ANNOUNCEMENT_DATA.typingText.length * getFramesPerCommandChar(fps);
+  const typingEndFrame = getTypingDoneFrame(fps);
+  const pointerMoveStartFrame = getSubmitMoveStartFrame(fps);
+  const clickStartFrame = getSubmitClickStartFrame(fps);
+
   const visibleChars = Math.floor(
     interpolate(frame, [0, typingEndFrame], [0, ANNOUNCEMENT_DATA.typingText.length], {
       extrapolateLeft: "clamp",
@@ -21,6 +29,37 @@ export const TerminalContent: React.FC = () => {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
+  const pointerTravel = interpolate(frame, [pointerMoveStartFrame, clickStartFrame], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const pointerAppear = interpolate(frame, [pointerMoveStartFrame - 2, pointerMoveStartFrame], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const pointerFadeOut = interpolate(
+    frame,
+    [clickStartFrame + ANNOUNCEMENT_DATA.submitClickInFrames - 2, clickStartFrame + ANNOUNCEMENT_DATA.submitClickInFrames],
+    [1, 0],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
+  );
+  const pointerOpacity = pointerAppear * pointerFadeOut;
+
+  const clickProgress = interpolate(
+    frame,
+    [clickStartFrame, clickStartFrame + ANNOUNCEMENT_DATA.submitClickInFrames],
+    [0, 1],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
+  );
+  const buttonPress = clickProgress < 0.5 ? clickProgress * 2 : (1 - clickProgress) * 2;
+
+  const appearTranslateY = (1 - inputAppear) * 14;
 
   return (
     <div
@@ -59,8 +98,10 @@ export const TerminalContent: React.FC = () => {
           alignItems: "center",
           padding: "16px 18px 16px 22px",
           opacity: inputAppear,
-          transform: `translateY(${(1 - inputAppear) * 14}px)`,
+          transform: `translateY(${appearTranslateY}px)`,
+          transformOrigin: "center center",
           backgroundColor: "#ffffff",
+          position: "relative",
         }}
       >
         <div
@@ -155,6 +196,8 @@ export const TerminalContent: React.FC = () => {
             alignItems: "center",
             justifyContent: "center",
             marginRight: 2,
+            transform: `scale(${1 - buttonPress * 0.1})`,
+            filter: `brightness(${1 - buttonPress * 0.14})`,
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
@@ -162,6 +205,31 @@ export const TerminalContent: React.FC = () => {
             <span style={waveBar(18)} />
             <span style={waveBar(11)} />
           </div>
+        </div>
+
+        <div
+          style={{
+            position: "absolute",
+            right: interpolate(pointerTravel, [0, 1], [102, 26]),
+            bottom: interpolate(pointerTravel, [0, 1], [-42, 18]),
+            width: 36,
+            height: 36,
+            opacity: pointerOpacity,
+            transform: `rotate(18deg) scale(${interpolate(buttonPress, [0, 1], [1, 0.92])})`,
+            transformOrigin: "center center",
+            filter: "drop-shadow(0 4px 8px rgba(15, 23, 42, 0.22))",
+            pointerEvents: "none",
+          }}
+        >
+          <div
+            style={{
+              width: 0,
+              height: 0,
+              borderTop: "11px solid transparent",
+              borderBottom: "11px solid transparent",
+              borderLeft: "20px solid #0f172a",
+            }}
+          />
         </div>
       </div>
     </div>
