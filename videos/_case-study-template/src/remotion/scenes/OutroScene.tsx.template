@@ -1,0 +1,68 @@
+import React from "react";
+import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { CASE_STUDY_DATA } from "./CaseStudyData";
+import { SceneFrame } from "./SceneFrame";
+import { CASE_COLORS, TYPOGRAPHY } from "./Theme";
+
+export const OUTRO_SCENE_DURATION = 105;
+
+export const OutroScene: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const rise = spring({
+    frame,
+    fps,
+    config: {
+      damping: 13,
+      stiffness: 120,
+    },
+  });
+
+  const glow = interpolate(frame, [0, 54], [0.45, 0.98], {
+    extrapolateRight: "clamp",
+  });
+
+  return (
+    <SceneFrame tone="cool" eyebrow="Close" title={CASE_STUDY_DATA.ctaTitle}>
+      <div
+        style={{
+          marginTop: 12,
+          display: "flex",
+          flexDirection: "column",
+          gap: 24,
+          transform: `translateY(${(1 - rise) * 20}px)`,
+          opacity: rise,
+        }}
+      >
+        <p
+          style={{
+            margin: 0,
+            fontSize: 30,
+            lineHeight: 1.4,
+            maxWidth: 1240,
+            color: "rgba(226, 232, 240, 0.9)",
+          }}
+        >
+          {CASE_STUDY_DATA.ctaSubtitle}
+        </p>
+
+        <div
+          style={{
+            width: 520,
+            borderRadius: 18,
+            border: "1px solid rgba(56, 189, 248, 0.55)",
+            backgroundColor: "rgba(14, 116, 144, 0.2)",
+            padding: "16px 22px",
+            fontFamily: TYPOGRAPHY.mono,
+            fontSize: 24,
+            color: CASE_COLORS.white,
+            boxShadow: `0 0 40px rgba(14, 165, 233, ${glow})`,
+          }}
+        >
+          Replace with your logo, URL, and next-step CTA
+        </div>
+      </div>
+    </SceneFrame>
+  );
+};

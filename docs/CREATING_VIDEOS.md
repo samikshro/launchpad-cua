@@ -11,8 +11,9 @@ pnpm create-video
 This interactive CLI will:
 1. Ask for a video name (kebab-case, e.g., `product-launch`)
 2. Ask for a display name (e.g., "Product Launch")
-3. Let you choose video dimensions (1080p, 720p, 4K, square, vertical)
-4. Scaffold all necessary files
+3. Let you choose a template (Default, Case Study, Launch Explainer, or Chatbot Input Announcement)
+4. Let you choose video dimensions (1080p, 720p, 4K, square, vertical)
+5. Scaffold all necessary files
 
 ## Video Project Structure
 

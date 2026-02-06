@@ -1,0 +1,88 @@
+export interface MetricBullet {
+  label: string;
+  before: number;
+  after: number;
+  unit: string;
+  direction: "increase" | "decrease";
+  summary: string;
+}
+
+export interface ProblemBullet {
+  issue: string;
+  outcome: string;
+}
+
+export interface CaseStudyData {
+  client: string;
+  industry: string;
+  durationLabel: string;
+  heroStatement: string;
+  challengeSummary: string;
+  problemBullets: ProblemBullet[];
+  responseBullets: string[];
+  metricBullets: MetricBullet[];
+  quote: string;
+  quoteAttribution: string;
+  ctaTitle: string;
+  ctaSubtitle: string;
+}
+
+export const CASE_STUDY_DATA: CaseStudyData = {
+  client: "Northstar Health Ops",
+  industry: "Multi-location healthcare staffing",
+  durationLabel: "90-day rollout",
+  heroStatement:
+    "How {{DISPLAY_NAME}} reduced ticket backlog and accelerated onboarding across 34 clinics.",
+  challengeSummary: "Fragmented workflows and manual escalations kept adding operational drag.",
+  problemBullets: [
+    {
+      issue: "Backlog climbed to 2,480 unresolved tickets every month.",
+      outcome: "Critical scheduling issues were waiting 5 to 7 days for resolution.",
+    },
+    {
+      issue: "Agents copied data across four disconnected tools.",
+      outcome: "Rework and duplicate entries consumed nearly 18 staff hours weekly.",
+    },
+    {
+      issue: "No shared visibility into queue priority.",
+      outcome: "Leadership could not predict SLA misses before customers were impacted.",
+    },
+  ],
+  responseBullets: [
+    "Unified intake, triage, and escalation in one workspace.",
+    "Added policy-driven automations for repeat issue categories.",
+    "Rolled out live dashboard alerts for at-risk SLAs.",
+    "Trained frontline operators with role-specific playbooks.",
+  ],
+  metricBullets: [
+    {
+      label: "Median resolution time",
+      before: 42,
+      after: 11,
+      unit: "h",
+      direction: "decrease",
+      summary: "Faster first-action routing and fewer handoffs cut time-to-resolution.",
+    },
+    {
+      label: "Monthly backlog",
+      before: 2480,
+      after: 690,
+      unit: " tickets",
+      direction: "decrease",
+      summary: "Automated triage and workload balancing reduced queue accumulation.",
+    },
+    {
+      label: "First-week agent productivity",
+      before: 52,
+      after: 88,
+      unit: "%",
+      direction: "increase",
+      summary: "Guided workflows improved onboarding speed and confidence.",
+    },
+  ],
+  quote:
+    "We went from firefighting every shift to proactively managing outcomes. The team finally has room to improve, not just react.",
+  quoteAttribution: "VP of Operations, Northstar Health Ops",
+  ctaTitle: "Turn operational friction into measurable gains.",
+  ctaSubtitle: "Use this template to tell your next customer success story in under 2 minutes.",
+};

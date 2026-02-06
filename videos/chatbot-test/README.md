@@ -1,0 +1,33 @@
+# Chatbot Test
+
+Chatbot Test video
+
+This project uses the **Chatbot Input Announcement template** inspired by the Remotion prompt flow:
+- ChatGPT-style chat window with input typing animation
+- staged assistant reply with staggered line reveals (50ms cadence)
+- 3D card movement (slide-in, drift rotation, scale-in)
+- flip transition toward camera with bottom transform origin
+- behind-card reveal sequence for headline + brand row
+
+## Development
+
+```bash
+pnpm remotion
+pnpm dev
+```
+
+## Rendering
+
+```bash
+pnpm render
+pnpm render:preview
+```
+
+## Where to customize
+
+- `src/remotion/scenes/AnnouncementData.ts`
+  - typed text, assistant lines, headline text, brands, timing values, motion values
+- `src/remotion/scenes/MasterScene.tsx`
+  - tune camera motion and flip transition style
+- `types/constants.ts`
+  - set composition dimensions and fps

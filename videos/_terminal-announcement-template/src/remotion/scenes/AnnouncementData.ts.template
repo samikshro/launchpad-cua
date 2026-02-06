@@ -1,0 +1,51 @@
+export const ANNOUNCEMENT_DATA = {
+  windowTitle: "ChatGPT",
+  inputPlaceholder: "Message ChatGPT",
+  typingText: "npx skills add remotion-dev/remotion",
+  sendButtonLabel: "Send",
+  charsPerSecond: 10,
+  outputDelaySeconds: 1,
+  outputLineIntervalMs: 50,
+  inputFontSize: 34,
+  messageFontSize: 24,
+  previewFontSize: 40,
+  backgroundColor: "#f8fafc",
+  terminalIntroOffsetY: 700,
+  terminalRestOffsetY: 100,
+  terminalRotateX: 20,
+  terminalRotateYStart: 10,
+  terminalRotateYEnd: -10,
+  terminalStartScale: 0.9,
+  terminalEndScale: 1,
+  flipOutDegrees: -90,
+  headlineText: "Agent Skills now available",
+  headlineDurationInFrames: 60,
+  brands: ["Remotion", "Claude Code", "OpenCode"] as const,
+  starterAssistantMessage: "How can I help you today?",
+  outputHeader: ["Absolutely. Here is the quickest way to run that:"],
+  outputLines: [
+    "1. Open your project directory.",
+    "2. Run: npx skills add remotion-dev/remotion",
+    "3. Restart your editor if command hints do not appear.",
+    "4. Start creating with the new Remotion skill templates.",
+  ],
+};
+
+export const getFramesPerCommandChar = (fps: number): number => {
+  return fps / ANNOUNCEMENT_DATA.charsPerSecond;
+};
+
+export const getFramesPerOutputLine = (fps: number): number => {
+  return Math.max(1, Math.round((fps * ANNOUNCEMENT_DATA.outputLineIntervalMs) / 1000));
+};
+
+export const getOutputStartFrame = (fps: number): number => {
+  const typingFrames = ANNOUNCEMENT_DATA.typingText.length * getFramesPerCommandChar(fps);
+  const delayFrames = ANNOUNCEMENT_DATA.outputDelaySeconds * fps;
+
+  return Math.ceil(typingFrames + delayFrames);
+};
+
+export const getOutputDoneFrame = (fps: number): number => {
+  return getOutputStartFrame(fps) + ANNOUNCEMENT_DATA.outputLines.length * getFramesPerOutputLine(fps);
+};

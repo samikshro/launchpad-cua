@@ -1,0 +1,217 @@
+import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import {
+  ANNOUNCEMENT_DATA,
+  getFramesPerCommandChar,
+  getFramesPerOutputLine,
+  getOutputStartFrame,
+} from "./AnnouncementData";
+import { Cursor } from "./Cursor";
+
+export const TerminalContent: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const typingEndFrame = ANNOUNCEMENT_DATA.typingText.length * getFramesPerCommandChar(fps);
+  const outputStartFrame = getOutputStartFrame(fps);
+
+  const visibleChars = Math.floor(
+    interpolate(frame, [0, typingEndFrame], [0, ANNOUNCEMENT_DATA.typingText.length], {
+      extrapolateRight: "clamp",
+    })
+  );
+
+  const displayedText = ANNOUNCEMENT_DATA.typingText.slice(0, visibleChars);
+  const isTyping = visibleChars < ANNOUNCEMENT_DATA.typingText.length;
+  const showOutput = frame >= outputStartFrame;
+
+  const framesPerLine = getFramesPerOutputLine(fps);
+  const linesStartFrame = outputStartFrame + framesPerLine;
+
+  const visibleLines = Math.floor(
+    interpolate(
+      frame,
+      [
+        linesStartFrame,
+        linesStartFrame + ANNOUNCEMENT_DATA.outputLines.length * framesPerLine,
+      ],
+      [0, ANNOUNCEMENT_DATA.outputLines.length],
+      {
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+      }
+    )
+  );
+
+  return (
+    <div
+      style={{
+        flex: 1,
+        padding: 20,
+        backgroundColor: "#ffffff",
+        fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+      }}
+    >
+      {!showOutput ? (
+        <div
+          style={{
+            border: "1px solid #d1d5db",
+            borderRadius: 14,
+            backgroundColor: "#f8fafc",
+            padding: "10px 14px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 14,
+              color: "#64748b",
+              marginBottom: 4,
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              textTransform: "uppercase",
+            }}
+          >
+            Typing Preview
+          </div>
+          <div
+            style={{
+              fontSize: ANNOUNCEMENT_DATA.previewFontSize,
+              color: "#0f172a",
+              lineHeight: 1.1,
+              fontWeight: 600,
+              fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+              display: "flex",
+              alignItems: "center",
+              minHeight: 46,
+            }}
+          >
+            <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+              {displayedText}
+            </span>
+            <Cursor blinking={!isTyping} />
+          </div>
+        </div>
+      ) : null}
+
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          gap: 12,
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            alignSelf: "flex-start",
+            maxWidth: "76%",
+            backgroundColor: "#f8fafc",
+            border: "1px solid #e2e8f0",
+            borderRadius: 18,
+            padding: "12px 16px",
+            color: "#0f172a",
+            fontSize: ANNOUNCEMENT_DATA.messageFontSize,
+            lineHeight: 1.35,
+          }}
+        >
+          {ANNOUNCEMENT_DATA.starterAssistantMessage}
+        </div>
+
+        {showOutput ? (
+          <div
+            style={{
+              alignSelf: "flex-end",
+              maxWidth: "86%",
+              backgroundColor: "#0f172a",
+              borderRadius: 18,
+              padding: "12px 16px",
+              color: "#f8fafc",
+              fontSize: ANNOUNCEMENT_DATA.messageFontSize,
+              lineHeight: 1.3,
+            }}
+          >
+            {ANNOUNCEMENT_DATA.typingText}
+          </div>
+        ) : null}
+
+        {showOutput ? (
+          <div
+            style={{
+              alignSelf: "flex-start",
+              maxWidth: "86%",
+              backgroundColor: "#f8fafc",
+              border: "1px solid #e2e8f0",
+              borderRadius: 18,
+              padding: "12px 16px",
+              color: "#0f172a",
+              fontSize: ANNOUNCEMENT_DATA.messageFontSize,
+              lineHeight: 1.35,
+            }}
+          >
+            <div style={{ marginBottom: 8, fontWeight: 600, color: "#1e293b" }}>
+              {ANNOUNCEMENT_DATA.outputHeader[0]}
+            </div>
+            {ANNOUNCEMENT_DATA.outputLines.slice(0, visibleLines).map((line, index) => {
+              return (
+                <div key={`${line}-${index}`} style={{ color: "#334155" }}>
+                  {line}
+                </div>
+              );
+            })}
+          </div>
+        ) : null}
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+          border: "1px solid #cbd5e1",
+          borderRadius: 999,
+          padding: "12px 14px 12px 18px",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 8px 28px rgba(15, 23, 42, 0.08)",
+          minHeight: 64,
+        }}
+      >
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            color: showOutput || displayedText.length > 0 ? "#0f172a" : "#94a3b8",
+            fontSize: ANNOUNCEMENT_DATA.inputFontSize,
+            lineHeight: 1,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+          }}
+        >
+          {displayedText || ANNOUNCEMENT_DATA.inputPlaceholder}
+          {!showOutput ? <Cursor blinking={!isTyping} /> : null}
+        </div>
+        <div
+          style={{
+            borderRadius: 999,
+            backgroundColor: "#10a37f",
+            color: "#ffffff",
+            fontWeight: 600,
+            fontSize: 18,
+            padding: "10px 16px",
+            minWidth: 84,
+            textAlign: "center",
+          }}
+        >
+          {ANNOUNCEMENT_DATA.sendButtonLabel}
+        </div>
+      </div>
+    </div>
+  );
+};

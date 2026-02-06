@@ -1,0 +1,104 @@
+import React from "react";
+import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { CASE_STUDY_DATA } from "./CaseStudyData";
+import { SceneFrame } from "./SceneFrame";
+import { CASE_COLORS, TYPOGRAPHY } from "./Theme";
+
+export const INTRO_SCENE_DURATION = 120;
+
+export const IntroScene: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const cardRise = spring({
+    frame,
+    fps,
+    delay: 6,
+    config: {
+      damping: 14,
+      stiffness: 130,
+    },
+  });
+
+  const subtitleOpacity = interpolate(frame, [16, 40], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const chips = [CASE_STUDY_DATA.client, CASE_STUDY_DATA.industry, CASE_STUDY_DATA.durationLabel];
+
+  return (
+    <SceneFrame tone="contrast" eyebrow="Customer Story" title="From Pain Points to Outcomes">
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 26,
+          flex: 1,
+          transform: `translateY(${(1 - cardRise) * 20}px)`,
+        }}
+      >
+        <p
+          style={{
+            margin: 0,
+            fontSize: 43,
+            lineHeight: 1.2,
+            letterSpacing: -0.8,
+            maxWidth: 1400,
+            opacity: 0.95,
+            fontWeight: 600,
+          }}
+        >
+          {CASE_STUDY_DATA.heroStatement}
+        </p>
+
+        <p
+          style={{
+            margin: 0,
+            fontSize: 29,
+            lineHeight: 1.5,
+            maxWidth: 1320,
+            color: "rgba(226, 232, 240, 0.84)",
+            opacity: subtitleOpacity,
+          }}
+        >
+          Blue Alpha unified spend, quality, and causality into one decision loop so 1440 could move from attribution debate to weekly execution.
+        </p>
+
+        <div
+          style={{
+            marginTop: "auto",
+            display: "flex",
+            gap: 16,
+            flexWrap: "wrap",
+            fontFamily: TYPOGRAPHY.mono,
+          }}
+        >
+          {chips.map((chip, index) => {
+            const chipOpacity = interpolate(frame, [18 + index * 5, 34 + index * 5], [0, 1], {
+              extrapolateLeft: "clamp",
+              extrapolateRight: "clamp",
+            });
+
+            return (
+              <div
+                key={chip}
+                style={{
+                  opacity: chipOpacity,
+                  borderRadius: 16,
+                  border: "1px solid rgba(148, 163, 184, 0.5)",
+                  backgroundColor: "rgba(30, 41, 59, 0.56)",
+                  padding: "12px 18px",
+                  fontSize: 19,
+                  color: CASE_COLORS.cloud,
+                }}
+              >
+                {chip}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </SceneFrame>
+  );
+};

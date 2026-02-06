@@ -62,7 +62,10 @@ launchpad/
 │   ├── shared/         # Reusable components (FadeIn, SlideUp, TextReveal)
 │   └── assets/         # Brand assets (colors, fonts, sounds)
 ├── videos/
-│   ├── _template/      # Template for new videos
+│   ├── _template/      # Default starter template
+│   ├── _case-study-template/ # Case-study starter template
+│   ├── _launch-template/ # Launch explainer template with dashboard fly-through scenes
+│   ├── _terminal-announcement-template/ # Chatbot input + assistant reply reveal template
 │   └── cuabench/       # Example video project
 ├── scripts/
 │   └── create-video.ts # CLI to scaffold new videos

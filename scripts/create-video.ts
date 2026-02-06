@@ -3,8 +3,41 @@ import * as fs from "fs";
 import * as path from "path";
 import * as readline from "readline";
 
-const TEMPLATE_DIR = path.join(__dirname, "../videos/_template");
 const VIDEOS_DIR = path.join(__dirname, "../videos");
+
+interface TemplateConfig {
+  key: string;
+  label: string;
+  description: string;
+  dir: string;
+}
+
+const TEMPLATE_OPTIONS: TemplateConfig[] = [
+  {
+    key: "1",
+    label: "Default",
+    description: "Minimal starter with one intro scene",
+    dir: path.join(__dirname, "../videos/_template"),
+  },
+  {
+    key: "2",
+    label: "Case Study",
+    description: "Challenge/response/outcome narrative with metric bullets",
+    dir: path.join(__dirname, "../videos/_case-study-template"),
+  },
+  {
+    key: "3",
+    label: "Launch Explainer",
+    description: "Problem/solution/features/CTA flow with dashboard fly-through motion",
+    dir: path.join(__dirname, "../videos/_launch-template"),
+  },
+  {
+    key: "4",
+    label: "Chatbot Input Announcement",
+    description: "3D chat app window with input typing, staged assistant reply, and flip reveal transition",
+    dir: path.join(__dirname, "../videos/_terminal-announcement-template"),
+  },
+];
 
 interface VideoConfig {
   name: string; // e.g., "feature-launch"
@@ -117,6 +150,20 @@ async function main() {
   // Get description
   const description = await prompt("Description (optional): ") || `${displayName} video`;
 
+  // Choose starter template
+  console.log("\nTemplate presets:");
+  TEMPLATE_OPTIONS.forEach((template) => {
+    console.log(`  ${template.key}. ${template.label} - ${template.description}`);
+  });
+
+  const templateChoice = await prompt("Choose template [1]: ") || "1";
+  const selectedTemplate = TEMPLATE_OPTIONS.find((template) => template.key === templateChoice);
+
+  if (!selectedTemplate) {
+    console.error(`\n❌ Invalid template choice: "${templateChoice}"`);
+    process.exit(1);
+  }
+
   // Get dimensions
   console.log("\nVideo presets:");
   console.log("  1. 1080p (1920x1080) - default");
@@ -160,10 +207,11 @@ async function main() {
 
   console.log(`\n📁 Creating video project: ${name}`);
   console.log(`   Display name: ${displayName}`);
+  console.log(`   Template: ${selectedTemplate.label}`);
   console.log(`   Dimensions: ${width}x${height} @ 30fps`);
 
   // Copy template
-  copyDirectory(TEMPLATE_DIR, videoDir);
+  copyDirectory(selectedTemplate.dir, videoDir);
 
   // Process template files
   processTemplateFiles(videoDir, config);

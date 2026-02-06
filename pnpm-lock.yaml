@@ -46,6 +46,91 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  videos/chatbot-test:
+    dependencies:
+      '@launchpad/assets':
+        specifier: workspace:*
+        version: link:../../packages/assets
+      '@launchpad/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@remotion/bundler':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/cli':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/google-fonts':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/paths':
+        specifier: 4.0.407
+        version: 4.0.407
+      '@remotion/player':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/shapes':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/tailwind-v4':
+        specifier: 4.0.407
+        version: 4.0.407(@remotion/bundler@4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(webpack@5.96.1)
+      clsx:
+        specifier: 2.1.1
+        version: 2.1.1
+      next:
+        specifier: 16.0.10
+        version: 16.0.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      remotion:
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      tailwind-merge:
+        specifier: 3.0.1
+        version: 3.0.1
+      zod:
+        specifier: 3.22.3
+        version: 3.22.3
+    devDependencies:
+      '@remotion/eslint-plugin':
+        specifier: 4.0.407
+        version: 4.0.407(eslint@9.19.0(jiti@2.6.1))(typescript@5.9.3)
+      '@tailwindcss/postcss':
+        specifier: 4.1.1
+        version: 4.1.1
+      '@types/node':
+        specifier: 20.12.14
+        version: 20.12.14
+      '@types/react':
+        specifier: 19.2.7
+        version: 19.2.7
+      '@types/react-dom':
+        specifier: 19.2.3
+        version: 19.2.3(@types/react@19.2.7)
+      autoprefixer:
+        specifier: 10.4.20
+        version: 10.4.20(postcss@8.4.47)
+      eslint:
+        specifier: 9.19.0
+        version: 9.19.0(jiti@2.6.1)
+      postcss:
+        specifier: 8.4.47
+        version: 8.4.47
+      prettier:
+        specifier: 3.6.0
+        version: 3.6.0
+      tailwindcss:
+        specifier: 4.0.3
+        version: 4.0.3
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+
   videos/cuabench:
     dependencies:
       '@launchpad/assets':
@@ -131,7 +216,7 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
-  videos/cuabench-launch:
+  videos/launch-test:
     dependencies:
       '@launchpad/assets':
         specifier: workspace:*
@@ -160,94 +245,6 @@ importers:
       '@remotion/tailwind-v4':
         specifier: 4.0.407
         version: 4.0.407(@remotion/bundler@4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(webpack@5.96.1)
-      clsx:
-        specifier: 2.1.1
-        version: 2.1.1
-      next:
-        specifier: 16.0.10
-        version: 16.0.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      react:
-        specifier: 19.2.3
-        version: 19.2.3
-      react-dom:
-        specifier: 19.2.3
-        version: 19.2.3(react@19.2.3)
-      remotion:
-        specifier: 4.0.407
-        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      tailwind-merge:
-        specifier: 3.0.1
-        version: 3.0.1
-      zod:
-        specifier: 3.22.3
-        version: 3.22.3
-    devDependencies:
-      '@remotion/eslint-plugin':
-        specifier: 4.0.407
-        version: 4.0.407(eslint@9.19.0(jiti@2.6.1))(typescript@5.9.3)
-      '@tailwindcss/postcss':
-        specifier: 4.1.1
-        version: 4.1.1
-      '@types/node':
-        specifier: 20.12.14
-        version: 20.12.14
-      '@types/react':
-        specifier: 19.2.3
-        version: 19.2.3
-      '@types/react-dom':
-        specifier: 19.2.3
-        version: 19.2.3(@types/react@19.2.3)
-      autoprefixer:
-        specifier: 10.4.20
-        version: 10.4.20(postcss@8.4.47)
-      eslint:
-        specifier: 9.19.0
-        version: 9.19.0(jiti@2.6.1)
-      postcss:
-        specifier: 8.4.47
-        version: 8.4.47
-      prettier:
-        specifier: 3.6.0
-        version: 3.6.0
-      tailwindcss:
-        specifier: 4.0.3
-        version: 4.0.3
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-
-  videos/cuabenchnew:
-    dependencies:
-      '@launchpad/assets':
-        specifier: workspace:*
-        version: link:../../packages/assets
-      '@launchpad/shared':
-        specifier: workspace:*
-        version: link:../../packages/shared
-      '@remotion/bundler':
-        specifier: 4.0.407
-        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@remotion/cli':
-        specifier: 4.0.407
-        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@remotion/google-fonts':
-        specifier: 4.0.407
-        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@remotion/paths':
-        specifier: 4.0.407
-        version: 4.0.407
-      '@remotion/player':
-        specifier: 4.0.407
-        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@remotion/shapes':
-        specifier: 4.0.407
-        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@remotion/tailwind-v4':
-        specifier: 4.0.407
-        version: 4.0.407(@remotion/bundler@4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(webpack@5.96.1)
-      '@remotion/transitions':
-        specifier: 4.0.407
-        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -304,7 +301,177 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
-  videos/skills-announcement:
+  videos/launch-video:
+    dependencies:
+      '@launchpad/assets':
+        specifier: workspace:*
+        version: link:../../packages/assets
+      '@launchpad/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@remotion/bundler':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/cli':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/google-fonts':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/paths':
+        specifier: 4.0.407
+        version: 4.0.407
+      '@remotion/player':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/shapes':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/tailwind-v4':
+        specifier: 4.0.407
+        version: 4.0.407(@remotion/bundler@4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(webpack@5.96.1)
+      clsx:
+        specifier: 2.1.1
+        version: 2.1.1
+      next:
+        specifier: 16.0.10
+        version: 16.0.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      remotion:
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      tailwind-merge:
+        specifier: 3.0.1
+        version: 3.0.1
+      zod:
+        specifier: 3.22.3
+        version: 3.22.3
+    devDependencies:
+      '@remotion/eslint-plugin':
+        specifier: 4.0.407
+        version: 4.0.407(eslint@9.19.0(jiti@2.6.1))(typescript@5.9.3)
+      '@tailwindcss/postcss':
+        specifier: 4.1.1
+        version: 4.1.1
+      '@types/node':
+        specifier: 20.12.14
+        version: 20.12.14
+      '@types/react':
+        specifier: 19.2.7
+        version: 19.2.7
+      '@types/react-dom':
+        specifier: 19.2.3
+        version: 19.2.3(@types/react@19.2.7)
+      autoprefixer:
+        specifier: 10.4.20
+        version: 10.4.20(postcss@8.4.47)
+      eslint:
+        specifier: 9.19.0
+        version: 9.19.0(jiti@2.6.1)
+      postcss:
+        specifier: 8.4.47
+        version: 8.4.47
+      prettier:
+        specifier: 3.6.0
+        version: 3.6.0
+      tailwindcss:
+        specifier: 4.0.3
+        version: 4.0.3
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+
+  videos/terminal-test:
+    dependencies:
+      '@launchpad/assets':
+        specifier: workspace:*
+        version: link:../../packages/assets
+      '@launchpad/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@remotion/bundler':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/cli':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/google-fonts':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/paths':
+        specifier: 4.0.407
+        version: 4.0.407
+      '@remotion/player':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/shapes':
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/tailwind-v4':
+        specifier: 4.0.407
+        version: 4.0.407(@remotion/bundler@4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(webpack@5.96.1)
+      clsx:
+        specifier: 2.1.1
+        version: 2.1.1
+      next:
+        specifier: 16.0.10
+        version: 16.0.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      remotion:
+        specifier: 4.0.407
+        version: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      tailwind-merge:
+        specifier: 3.0.1
+        version: 3.0.1
+      zod:
+        specifier: 3.22.3
+        version: 3.22.3
+    devDependencies:
+      '@remotion/eslint-plugin':
+        specifier: 4.0.407
+        version: 4.0.407(eslint@9.19.0(jiti@2.6.1))(typescript@5.9.3)
+      '@tailwindcss/postcss':
+        specifier: 4.1.1
+        version: 4.1.1
+      '@types/node':
+        specifier: 20.12.14
+        version: 20.12.14
+      '@types/react':
+        specifier: 19.2.7
+        version: 19.2.7
+      '@types/react-dom':
+        specifier: 19.2.3
+        version: 19.2.3(@types/react@19.2.7)
+      autoprefixer:
+        specifier: 10.4.20
+        version: 10.4.20(postcss@8.4.47)
+      eslint:
+        specifier: 9.19.0
+        version: 9.19.0(jiti@2.6.1)
+      postcss:
+        specifier: 8.4.47
+        version: 8.4.47
+      prettier:
+        specifier: 3.6.0
+        version: 3.6.0
+      tailwindcss:
+        specifier: 4.0.3
+        version: 4.0.3
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+
+  videos/testing:
     dependencies:
       '@launchpad/assets':
         specifier: workspace:*
@@ -1356,12 +1523,6 @@ packages:
     peerDependencies:
       '@remotion/bundler': 4.0.407
 
-  '@remotion/transitions@4.0.407':
-    resolution: {integrity: sha512-XnRoBM/IEjQ3BHjTlJS/b3o8uxq9CH/s8qAC9n1PWkhoWx4I1/JaUqFbkunc6LQIAPC7286up2Edtx2zAOP1rA==}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-
   '@remotion/web-renderer@4.0.407':
     resolution: {integrity: sha512-wO3IE+opVoT6mdcrZUzvD9urdglOr91qXO4uJqbTgzcVzRCpRp2iOPKQCjPmI/RxWQ6+fWN4VjZJP1E0iQIgGw==}
     peerDependencies:
@@ -1480,9 +1641,6 @@ packages:
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
     peerDependencies:
       '@types/react': ^19.2.0
-
-  '@types/react@19.2.3':
-    resolution: {integrity: sha512-k5dJVszUiNr1DSe8Cs+knKR6IrqhqdhpUwzqhkS8ecQTSf3THNtbfIp/umqHMpX2bv+9dkx3fwDv/86LcSfvSg==}
 
   '@types/react@19.2.7':
     resolution: {integrity: sha512-MWtvHrGZLFttgeEj28VXHxpmwYbor/ATPYbBfSFZEIRK0ecCFLl2Qo55z52Hss+UV9CRN7trSeq1zbgx7YDWWg==}
@@ -3703,14 +3861,6 @@ snapshots:
       - typescript
       - webpack
 
-  '@remotion/transitions@4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
-    dependencies:
-      '@remotion/paths': 4.0.407
-      '@remotion/shapes': 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      react: 19.2.3
-      react-dom: 19.2.3(react@19.2.3)
-      remotion: 4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-
   '@remotion/web-renderer@4.0.407(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@remotion/licensing': 4.0.407
@@ -3821,17 +3971,9 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@types/react-dom@19.2.3(@types/react@19.2.3)':
-    dependencies:
-      '@types/react': 19.2.3
-
   '@types/react-dom@19.2.3(@types/react@19.2.7)':
     dependencies:
       '@types/react': 19.2.7
-
-  '@types/react@19.2.3':
-    dependencies:
-      csstype: 3.2.3
 
   '@types/react@19.2.7':
     dependencies:

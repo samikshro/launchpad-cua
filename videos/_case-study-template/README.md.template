@@ -1,0 +1,32 @@
+# {{DISPLAY_NAME}}
+
+{{DESCRIPTION}}
+
+This project uses the **Case Study template** with dedicated scenes for:
+- customer problem bullets (including what happened)
+- implementation steps
+- metric improvement bullets with animated before/after values
+- testimonial + CTA close
+
+## Development
+
+```bash
+pnpm remotion
+pnpm dev
+```
+
+## Rendering
+
+```bash
+pnpm render
+pnpm render:preview
+```
+
+## Where to customize
+
+- `src/remotion/scenes/CaseStudyData.ts`
+  - Replace customer name, challenge points, response bullets, and metrics
+- `src/remotion/scenes/*Scene.tsx`
+  - Fine-tune layout, timing, and animation behavior
+- `types/constants.ts`
+  - Change composition dimensions and fps

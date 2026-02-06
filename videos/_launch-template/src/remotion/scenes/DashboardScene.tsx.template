@@ -1,0 +1,331 @@
+import React from "react";
+import { Easing, interpolate, useCurrentFrame } from "remotion";
+import { LAUNCH_DATA } from "./LaunchData";
+import { SceneFrame } from "./SceneFrame";
+import { LAUNCH_COLORS, PANEL_SHADOW, TYPOGRAPHY } from "./Theme";
+
+export const DASHBOARD_SCENE_DURATION = 230;
+
+const focusSections = [
+  { start: 48, end: 102, x: 220, y: 132, scale: 1.24, index: 0 },
+  { start: 102, end: 156, x: -190, y: 126, scale: 1.24, index: 1 },
+  { start: 156, end: 208, x: 0, y: -142, scale: 1.2, index: 2 },
+] as const;
+
+const barSet = [64, 88, 102, 76, 122, 94, 136];
+const funnelSet = [100, 82, 65, 46, 32];
+
+export const DashboardScene: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const introProgress = interpolate(frame, [0, 34], [0, 1], {
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  const outroProgress = interpolate(frame, [208, DASHBOARD_SCENE_DURATION], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: Easing.in(Easing.cubic),
+  });
+
+  let cameraX = 0;
+  let cameraY = 0;
+  let cameraScale = interpolate(frame, [0, 36], [0.82, 1], {
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  focusSections.forEach((section) => {
+    const progress = interpolate(frame, [section.start, section.end], [0, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.inOut(Easing.cubic),
+    });
+
+    cameraX += section.x * progress;
+    cameraY += section.y * progress;
+    cameraScale += (section.scale - 1) * progress;
+  });
+
+  cameraScale = interpolate(outroProgress, [0, 1], [cameraScale, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  cameraX = interpolate(outroProgress, [0, 1], [cameraX, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  cameraY = interpolate(outroProgress, [0, 1], [cameraY, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const activeSection = focusSections.find((section) => frame >= section.start && frame < section.end);
+  const sectionData = activeSection ? LAUNCH_DATA.dashboardSections[activeSection.index] : null;
+
+  const panelOpacity = interpolate(introProgress, [0, 1], [0.2, 1], {
+    extrapolateRight: "clamp",
+  });
+
+  return (
+    <SceneFrame
+      tone="night"
+      eyebrow="Product UI"
+      title="Fly through a dashboard people can actually read"
+      subtitle="Start wide, then push into key modules so viewers understand exactly where value appears."
+    >
+      <div style={{ display: "flex", flexDirection: "column", flex: 1, gap: 16 }}>
+        <div
+          style={{
+            borderRadius: 24,
+            border: "1px solid rgba(56, 189, 248, 0.35)",
+            boxShadow: PANEL_SHADOW,
+            backgroundColor: "rgba(2, 6, 23, 0.72)",
+            overflow: "hidden",
+            flex: 1,
+            position: "relative",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 56,
+              background: "linear-gradient(90deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.72))",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "0 20px",
+              borderBottom: "1px solid rgba(148, 163, 184, 0.25)",
+              zIndex: 4,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ width: 10, height: 10, borderRadius: 999, backgroundColor: "#f87171" }} />
+              <div style={{ width: 10, height: 10, borderRadius: 999, backgroundColor: "#facc15" }} />
+              <div style={{ width: 10, height: 10, borderRadius: 999, backgroundColor: "#4ade80" }} />
+              <span
+                style={{
+                  fontFamily: TYPOGRAPHY.mono,
+                  color: "rgba(186, 230, 253, 0.92)",
+                  fontSize: 14,
+                  marginLeft: 12,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                }}
+              >
+                command center
+              </span>
+            </div>
+            <span
+              style={{
+                fontSize: 14,
+                color: "rgba(203, 213, 225, 0.8)",
+                fontFamily: TYPOGRAPHY.mono,
+              }}
+            >
+              live mode
+            </span>
+          </div>
+
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              top: 56,
+              padding: 16,
+              opacity: panelOpacity,
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                transform: `translate(${cameraX}px, ${cameraY}px) scale(${cameraScale})`,
+                transformOrigin: "center center",
+                transition: "transform 120ms linear",
+              }}
+            >
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1.45fr 1fr",
+                  gridTemplateRows: "1fr 0.9fr",
+                  gap: 14,
+                  height: "100%",
+                }}
+              >
+                <div
+                  style={{
+                    borderRadius: 16,
+                    border: `1px solid ${activeSection?.index === 0 ? "rgba(56, 189, 248, 0.8)" : "rgba(148, 163, 184, 0.3)"}`,
+                    backgroundColor: "rgba(15, 23, 42, 0.76)",
+                    padding: 14,
+                    boxShadow: activeSection?.index === 0 ? "0 0 28px rgba(56, 189, 248, 0.5)" : "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 12,
+                  }}
+                >
+                  <span style={{ fontSize: 17, color: "rgba(203, 213, 225, 0.9)", fontWeight: 600 }}>Pipeline Velocity</span>
+                  <div style={{ display: "flex", alignItems: "flex-end", gap: 7, flex: 1 }}>
+                    {barSet.map((bar, index) => {
+                      const liveHeight = interpolate(frame, [20 + index * 2, 90 + index * 2], [24, bar], {
+                        extrapolateLeft: "clamp",
+                        extrapolateRight: "clamp",
+                      });
+
+                      return (
+                        <div
+                          key={index}
+                          style={{
+                            flex: 1,
+                            height: `${liveHeight}%`,
+                            borderRadius: 9,
+                            background: "linear-gradient(180deg, rgba(56, 189, 248, 0.95), rgba(14, 116, 144, 0.55))",
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    borderRadius: 16,
+                    border: `1px solid ${activeSection?.index === 1 ? "rgba(132, 204, 22, 0.82)" : "rgba(148, 163, 184, 0.3)"}`,
+                    backgroundColor: "rgba(15, 23, 42, 0.76)",
+                    padding: 14,
+                    boxShadow: activeSection?.index === 1 ? "0 0 28px rgba(132, 204, 22, 0.45)" : "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 10,
+                  }}
+                >
+                  <span style={{ fontSize: 17, color: "rgba(203, 213, 225, 0.9)", fontWeight: 600 }}>Activation Funnel</span>
+                  {funnelSet.map((width, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        height: 24,
+                        width: `${width}%`,
+                        borderRadius: 999,
+                        backgroundColor: `rgba(132, 204, 22, ${0.3 + (5 - index) * 0.13})`,
+                      }}
+                    />
+                  ))}
+                </div>
+
+                <div
+                  style={{
+                    borderRadius: 16,
+                    border: `1px solid ${activeSection?.index === 2 ? "rgba(251, 146, 60, 0.78)" : "rgba(148, 163, 184, 0.3)"}`,
+                    backgroundColor: "rgba(15, 23, 42, 0.76)",
+                    padding: 14,
+                    boxShadow: activeSection?.index === 2 ? "0 0 28px rgba(251, 146, 60, 0.45)" : "none",
+                    display: "grid",
+                    gridTemplateColumns: "1.2fr 1fr",
+                    gap: 10,
+                  }}
+                >
+                  <div
+                    style={{
+                      borderRadius: 12,
+                      border: "1px solid rgba(148, 163, 184, 0.25)",
+                      padding: 12,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      backgroundColor: "rgba(15, 23, 42, 0.65)",
+                    }}
+                  >
+                    <span style={{ color: "rgba(203, 213, 225, 0.85)", fontSize: 14 }}>Renewal confidence</span>
+                    <span style={{ color: "rgba(251, 191, 36, 0.95)", fontSize: 36, fontWeight: 700 }}>89%</span>
+                  </div>
+
+                  <div
+                    style={{
+                      borderRadius: 12,
+                      border: "1px solid rgba(148, 163, 184, 0.25)",
+                      padding: 12,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      backgroundColor: "rgba(15, 23, 42, 0.65)",
+                    }}
+                  >
+                    <span style={{ color: "rgba(203, 213, 225, 0.85)", fontSize: 14 }}>Revenue at risk</span>
+                    <span style={{ color: "rgba(74, 222, 128, 0.95)", fontSize: 36, fontWeight: 700 }}>-26%</span>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    borderRadius: 16,
+                    border: "1px solid rgba(148, 163, 184, 0.3)",
+                    backgroundColor: "rgba(15, 23, 42, 0.76)",
+                    padding: 14,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 8,
+                  }}
+                >
+                  <span style={{ fontSize: 17, color: "rgba(203, 213, 225, 0.9)", fontWeight: 600 }}>Live Ops Feed</span>
+                  {["Pricing page spike detected", "Onboarding ticket backlog cleared", "Expansion signal from enterprise cohort"].map((item) => (
+                    <div
+                      key={item}
+                      style={{
+                        borderRadius: 10,
+                        border: "1px solid rgba(148, 163, 184, 0.24)",
+                        padding: "8px 10px",
+                        fontSize: 14,
+                        color: "rgba(226, 232, 240, 0.88)",
+                        backgroundColor: "rgba(30, 41, 59, 0.58)",
+                      }}
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style={{
+            minHeight: 74,
+            borderRadius: 14,
+            border: "1px solid rgba(148, 163, 184, 0.26)",
+            backgroundColor: "rgba(15, 23, 42, 0.54)",
+            padding: "12px 16px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 12,
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <span style={{ color: "rgba(186, 230, 253, 0.9)", fontFamily: TYPOGRAPHY.mono, fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              {sectionData ? sectionData.label : "Dashboard Overview"}
+            </span>
+            <span style={{ color: "rgba(248, 250, 252, 0.95)", fontSize: 24, fontWeight: 600 }}>
+              {sectionData ? sectionData.headline : "Full-system snapshot"}
+            </span>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <span style={{ color: LAUNCH_COLORS.lime, fontSize: 22, fontWeight: 700 }}>
+              {sectionData ? sectionData.metric : "3-section fly-through"}
+            </span>
+          </div>
+        </div>
+      </div>
+    </SceneFrame>
+  );
+};
