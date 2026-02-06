@@ -12,13 +12,13 @@ Fades in content with optional directional movement.
 import { FadeIn } from "@launchpad/shared/components/animations";
 
 <FadeIn
-  durationInFrames={30}  // Animation duration (default: 20)
-  delay={0}              // Delay before starting (default: 0)
-  direction="up"         // "up" | "down" | "left" | "right" | "none"
-  distance={30}          // Movement distance in pixels (default: 30)
+  durationInFrames={30} // Animation duration (default: 20)
+  delay={0} // Delay before starting (default: 0)
+  direction="up" // "up" | "down" | "left" | "right" | "none"
+  distance={30} // Movement distance in pixels (default: 30)
 >
   <h1>Hello</h1>
-</FadeIn>
+</FadeIn>;
 ```
 
 ### SlideUp
@@ -28,13 +28,9 @@ Slides content up while fading in.
 ```tsx
 import { SlideUp } from "@launchpad/shared/components/animations";
 
-<SlideUp
-  durationInFrames={20}
-  delay={15}
-  distance={50}
->
+<SlideUp durationInFrames={20} delay={15} distance={50}>
   <p>Sliding up!</p>
-</SlideUp>
+</SlideUp>;
 ```
 
 ### TextReveal
@@ -47,11 +43,50 @@ import { TextReveal } from "@launchpad/shared/components/animations";
 <TextReveal
   durationInFrames={30}
   delay={0}
-  direction="left"  // "left" | "right"
+  direction="left" // "left" | "right"
 >
   <h1>Revealed!</h1>
-</TextReveal>
+</TextReveal>;
 ```
+
+### Manifesto Motion Toolkit
+
+Reusable building blocks for fast-paced manifesto edits with match-cut transitions.
+
+```tsx
+import {
+  KineticWordStagger,
+  PortalCircleTransition,
+  PillIconWipe,
+  DotSlashMorph,
+  GradientShiftBackground,
+  GravityDrop,
+  CoinSpinTransition,
+  NodeMapFlow,
+  ChromaPulseBadge,
+  GlowOutlineWord,
+  DashboardCardReveal,
+  GlassFloatCard,
+  MotionBlurWord,
+  CheckmarkDraw,
+  SmoothScrollCards,
+} from "@launchpad/shared/components/animations";
+```
+
+Core uses:
+
+- `KineticWordStagger`: Overshoot + staggered word entrances for manifesto headlines.
+- `PortalCircleTransition`: Expanding circle mask (good for `O`/portal match cuts).
+- `PillIconWipe`: Pill container expansion with horizontal icon wipe.
+- `DotSlashMorph`: Dot + slash geometric morph for logo transitions.
+- `GradientShiftBackground`: Fast radial gradient color shifts.
+- `GravityDrop` + `CoinSpinTransition`: Weighty object drops and Z-axis coin pushes.
+- `NodeMapFlow`: SVG trim-path reveal, node pops, and moving cursor.
+- `ChromaPulseBadge` + `GlowOutlineWord`: Chroma pulses and additive-style line draw.
+- `DashboardCardReveal`: Mask-revealed cards with animated progress bars.
+- `GlassFloatCard`: Glassmorphism overlays with sine-wave float.
+- `MotionBlurWord` + `CheckmarkDraw`: Velocity blur text with checkbox draw/fill.
+- `SmoothScrollCards`: Vertical card stacks with configurable stagger delay.
 
 ## Hooks
 
@@ -110,12 +145,12 @@ import { easings } from "@launchpad/shared/utils";
 interpolate(frame, [0, 30], [0, 1], { easing: easings.smooth });
 
 // Available easings:
-easings.smooth   // Ease out cubic (most common)
-easings.bounce   // Bouncy spring-like
-easings.linear   // No easing
-easings.inOut    // Slow start and end
-easings.sharp    // Sharp ease out
-easings.elastic  // Elastic bounce
+easings.smooth; // Ease out cubic (most common)
+easings.bounce; // Bouncy spring-like
+easings.linear; // No easing
+easings.inOut; // Slow start and end
+easings.sharp; // Sharp ease out
+easings.elastic; // Elastic bounce
 ```
 
 ## Types
@@ -125,15 +160,15 @@ easings.elastic  // Elastic bounce
 ```tsx
 import { VIDEO_PRESETS, FPS } from "@launchpad/shared/types";
 
-VIDEO_PRESETS["1080p"];   // { width: 1920, height: 1080 }
-VIDEO_PRESETS["720p"];    // { width: 1280, height: 720 }
-VIDEO_PRESETS["4k"];      // { width: 3840, height: 2160 }
-VIDEO_PRESETS["square"];  // { width: 1080, height: 1080 }
+VIDEO_PRESETS["1080p"]; // { width: 1920, height: 1080 }
+VIDEO_PRESETS["720p"]; // { width: 1280, height: 720 }
+VIDEO_PRESETS["4k"]; // { width: 3840, height: 2160 }
+VIDEO_PRESETS["square"]; // { width: 1080, height: 1080 }
 VIDEO_PRESETS["vertical"]; // { width: 1080, height: 1920 }
 
-FPS.STANDARD;   // 30
-FPS.CINEMATIC;  // 24
-FPS.SMOOTH;     // 60
+FPS.STANDARD; // 30
+FPS.CINEMATIC; // 24
+FPS.SMOOTH; // 60
 ```
 
 ## Brand Assets
@@ -143,11 +178,11 @@ FPS.SMOOTH;     // 60
 ```tsx
 import { COLORS } from "@launchpad/assets/brand";
 
-COLORS.primary           // "#0070f3"
-COLORS.background.cream  // "#FDF8F3"
-COLORS.background.dark   // "#000000"
-COLORS.text.primary      // "#1a1a1a"
-COLORS.accent.success    // "#10b981"
+COLORS.primary; // "#0070f3"
+COLORS.background.cream; // "#FDF8F3"
+COLORS.background.dark; // "#000000"
+COLORS.text.primary; // "#1a1a1a"
+COLORS.accent.success; // "#10b981"
 ```
 
 ### Fonts

@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+:root {
+  --bg-ink: #020617;
+  --bg-panel: #0f172a;
+  --text-main: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-ink);
+  color: var(--text-main);
+}

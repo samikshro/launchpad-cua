@@ -1,0 +1,98 @@
+export interface LaunchStep {
+  title: string;
+  detail: string;
+}
+
+export interface LaunchFeature {
+  name: string;
+  description: string;
+  value: string;
+}
+
+export interface DashboardSection {
+  label: string;
+  headline: string;
+  metric: string;
+  bullets: string[];
+}
+
+export const LAUNCH_DATA = {
+  productName: "Launch Test",
+  strapline: "From friction to flow in one launch video",
+  audiencePain: [
+    "Teams understand the problem, but not the path forward.",
+    "Feature lists look crowded and fail to create urgency.",
+    "Product demos are too dense for fast social feeds.",
+  ],
+  problemTicker: [
+    "Churn creeping up",
+    "Onboarding drop-off",
+    "Slow handoffs",
+    "No shared source of truth",
+    "Repetitive status updates",
+  ],
+  solutionSteps: [
+    {
+      title: "Detect",
+      detail: "Pull scattered signals into one live operating view.",
+    },
+    {
+      title: "Decide",
+      detail: "Prioritize the next best action with clear confidence.",
+    },
+    {
+      title: "Deliver",
+      detail: "Turn plans into coordinated execution in real time.",
+    },
+  ] as LaunchStep[],
+  motionLines: [
+    "WE SAW THE BOTTLENECK",
+    "WE BUILT THE FIX",
+    "WE SHIPPED THE WORKFLOW",
+    "WE CAN PROVE THE IMPACT",
+  ],
+  dashboardSections: [
+    {
+      label: "Acquisition",
+      headline: "Top-of-funnel health",
+      metric: "+38% qualified pipeline",
+      bullets: ["Channel quality by segment", "CAC trend with pacing", "Campaign lift in 7-day windows"],
+    },
+    {
+      label: "Activation",
+      headline: "Onboarding momentum",
+      metric: "2.3x faster time-to-value",
+      bullets: ["Stage conversion timeline", "Drop-off hotspots", "Task completion by persona"],
+    },
+    {
+      label: "Revenue",
+      headline: "Expansion + retention",
+      metric: "-26% churn risk",
+      bullets: ["Renewal confidence map", "Expansion signals", "Accounts needing intervention"],
+    },
+  ] as DashboardSection[],
+  features: [
+    {
+      name: "Live Signal Stream",
+      description: "Unifies product, CRM, and support telemetry in one view.",
+      value: "Sub-5s refresh",
+    },
+    {
+      name: "Playbook Automations",
+      description: "Executes launch workflows the instant a trigger appears.",
+      value: "11 hrs/week saved",
+    },
+    {
+      name: "Narrative Reports",
+      description: "Generates updates leadership can read in under a minute.",
+      value: "4x faster reporting",
+    },
+  ] as LaunchFeature[],
+  cta: {
+    headline: "Launch with a video that sells the journey",
+    body: "Use this template to tell a complete story: problem, solution, proof, and next step.",
+    primary: "Book a live walkthrough",
+    secondary: "Download launch deck",
+    url: "launch.yourcompany.com",
+  },
+};
